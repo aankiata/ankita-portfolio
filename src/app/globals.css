@@ -1,34 +1,51 @@
 @import "tailwindcss";
 
+/* ==========================================
+   THEME
+========================================== */
+
 :root {
-  --background: #07091b;
+  --background: #050816;
   --foreground: #ffffff;
-  --muted: #aeb4c5;
-  --purple: #6d4aff;
-  --blue: #375dff;
-  --surface: #0d1025;
-  --surface-elevated: #121632;
-  --border: rgba(255, 255, 255, 0.06);
+
+  --muted: #94a3b8;
+
+  --purple: #7c3aed;
+  --blue: #3b82f6;
+
+  --surface: #0f172a;
+  --surface-elevated: #1e293b;
+
+  --border: rgba(255, 255, 255, 0.08);
+
+  --card-glow: rgba(124, 58, 237, 0.18);
+  --hero-glow: rgba(59, 130, 246, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+
   --color-purple: var(--purple);
   --color-blue: var(--blue);
+
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
+
   --color-border: var(--border);
+
   --font-sans: var(--font-inter);
   --font-display: var(--font-syne);
 }
 
-.font-display {
-  font-family: var(--font-syne), system-ui, sans-serif;
-}
+/* ==========================================
+   BASE
+========================================== */
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -37,19 +54,107 @@ html {
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top,
+      rgba(124,58,237,.12),
+      transparent 35%),
+
+    radial-gradient(circle at bottom right,
+      rgba(59,130,246,.08),
+      transparent 40%),
+
+    var(--background);
+
   color: var(--foreground);
+
   font-family: var(--font-inter), system-ui, sans-serif;
+
   overflow-x: hidden;
+
+  min-height: 100vh;
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background: rgba(109, 74, 255, 0.35);
-  color: #ffffff;
+/* ==========================================
+   TYPOGRAPHY
+========================================== */
+
+.font-display {
+  font-family: var(--font-syne), system-ui, sans-serif;
 }
+
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #dbeafe
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+.accent-text {
+  background: linear-gradient(
+    135deg,
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+/* ==========================================
+   GLASSMORPHISM
+========================================== */
+
+.glass {
+  background: rgba(15, 23, 42, 0.55);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.35),
+    0 0 1px rgba(255,255,255,.08);
+}
+
+.glow-purple {
+  box-shadow:
+    0 0 80px rgba(124,58,237,.20);
+}
+
+.glow-blue {
+  box-shadow:
+    0 0 80px rgba(59,130,246,.18);
+}
+
+/* ==========================================
+   SECTIONS
+========================================== */
+
+.section-padding {
+  padding-left: clamp(1.5rem, 5vw, 6rem);
+  padding-right: clamp(1.5rem, 5vw, 6rem);
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -57,43 +162,103 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(109, 74, 255, 0.3);
+  background: rgba(124,58,237,.35);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(109, 74, 255, 0.5);
+  background: rgba(124,58,237,.65);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #aeb4c5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ==========================================
+   SELECTION
+========================================== */
+
+::selection {
+  background: rgba(124,58,237,.35);
+  color: white;
 }
 
-.accent-text {
-  background: linear-gradient(135deg, #6d4aff 0%, #375dff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes float {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+
 }
 
-.glass {
-  background: rgba(13, 16, 37, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
+.float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.glow-purple {
-  box-shadow: 0 0 60px rgba(109, 74, 255, 0.15);
+@keyframes pulseGlow {
+
+  0% {
+    box-shadow:
+      0 0 30px rgba(124,58,237,.15);
+  }
+
+  50% {
+    box-shadow:
+      0 0 60px rgba(124,58,237,.35);
+  }
+
+  100% {
+    box-shadow:
+      0 0 30px rgba(124,58,237,.15);
+  }
+
 }
 
-.glow-blue {
-  box-shadow: 0 0 60px rgba(55, 93, 255, 0.15);
+.pulse-glow {
+  animation: pulseGlow 4s infinite;
 }
 
-.section-padding {
-  padding-left: clamp(1.5rem, 5vw, 6rem);
-  padding-right: clamp(1.5rem, 5vw, 6rem);
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 }
+
+.fade-up {
+  animation: fadeUp .8s ease forwards;
+}
+
+@keyframes gradientShift {
+
+  0% {
+    background-position: left;
+  }
+
+  100% {
+    background-position: right;
+  }
+
+}
+
+.gradient-animation {
+  background-size: 300% 300%;
+  animation: gradientShift 8s ease infinite alternate;
+}
+
+
