@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 
+const CURRENT_YEAR = 2026;
+
 export function Footer() {
   return (
     <footer className="relative border-t border-white/5 py-16">
@@ -14,6 +16,7 @@ export function Footer() {
               {siteConfig.name.split(" ")[0]}
               <span className="text-purple">.</span>
             </p>
+
             <p className="mt-2 text-sm text-muted">
               Backend & Cloud Engineer · Building at scale
             </p>
@@ -28,6 +31,7 @@ export function Footer() {
             >
               <Linkedin size={18} />
             </a>
+
             <a
               href={siteConfig.links.github}
               target="_blank"
@@ -36,6 +40,7 @@ export function Footer() {
             >
               <Github size={18} />
             </a>
+
             <a
               href={`mailto:${siteConfig.email}`}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-muted transition-colors hover:border-purple/50 hover:text-white"
@@ -55,11 +60,13 @@ export function Footer() {
             Let&apos;s build something
             <span className="accent-text"> extraordinary</span>
           </p>
+
           <a
             href="#contact"
             className="group inline-flex items-center gap-2 text-muted transition-colors hover:text-white"
           >
             Get in touch
+
             <ArrowUpRight
               size={16}
               className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -68,9 +75,10 @@ export function Footer() {
         </motion.div>
 
         <p className="mt-16 text-center text-xs text-muted/60">
-          © {new Date().getFullYear()} {siteConfig.name}. Crafted with precision.
+          © {CURRENT_YEAR} {siteConfig.name}. Crafted with precision.
         </p>
       </div>
     </footer>
   );
 }
+
