@@ -86,7 +86,7 @@ export function Contact() {
 
             <div className="mt-8 flex items-center justify-center gap-2 text-sm text-muted">
               <MapPin size={14} />
-              Chennai, India · Available for remote
+              Open to Full-time Software Engineering Roles
             </div>
 
             <div className="mt-8 flex justify-center">
